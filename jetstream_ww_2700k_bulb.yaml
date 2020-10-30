@@ -1,0 +1,42 @@
+## Jetstream 9W 800lm Dimmable Bulb, Model reference: MA19WH
+substitutions:
+  display_name: "Jetstream WW 2700K Bulb"
+
+esphome:
+  name: jetstream_ww_2700k_bulb"
+  platform: ESP8266
+  board: esp01_1m
+  # Remove this line below if you do not want the bulb to remember the last on/off state
+  esp8266_restore_from_flash: true
+
+wifi:
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Jetstream WW 2700K Bulb"
+    password: ""
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: ""
+  
+switch:
+  - platform: restart
+    name: ${display_name} Restart
+  
+output:
+  - platform: esp8266_pwm
+    id: output_warm_white
+    pin: GPIO4
+
+light:
+  - platform: monochromatic
+    name: ${display_name}
+    output: output_warm_white
